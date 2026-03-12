@@ -156,11 +156,15 @@ kubernetes-fibonacci-cluster
 
 ---
 
-## 👤 Desarrollado por
+## 👨‍💻 Desarrollado por Isaac Esteban Haro Torres
 
-- Nombre: (tu nombre aqui)
-- GitHub: (tu github aqui)
+**Ingeniero en Sistemas · Full Stack · Automatización · Data**
+
+- 📧 Email: zackharo1@gmail.com
+- 📱 WhatsApp: 098805517
+- 💻 GitHub: https://github.com/ieharo1
+- 🌐 Portafolio: https://ieharo1.github.io/portafolio-isaac.haro/
 
 ---
 
-© 2026 - Todos los derechos reservados.
+© 2026 Isaac Esteban Haro Torres - Todos los derechos reservados.
