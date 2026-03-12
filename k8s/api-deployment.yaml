@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fibonacci-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fibonacci-api
+  template:
+    metadata:
+      labels:
+        app: fibonacci-api
+    spec:
+      containers:
+        - name: api
+          image: fibonacci-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: REDIS_PORT
+              value: "6379"
+            - name: QUEUE_NAME
+              value: cola_fibonacci
+            - name: RESULT_TTL_SECONDS
+              value: "3600"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fibonacci-api
+spec:
+  selector:
+    app: fibonacci-api
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+      nodePort: 30080
+  type: NodePort

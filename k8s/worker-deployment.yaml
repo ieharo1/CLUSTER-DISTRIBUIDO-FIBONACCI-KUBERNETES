@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fibonacci-worker
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: fibonacci-worker
+  template:
+    metadata:
+      labels:
+        app: fibonacci-worker
+    spec:
+      containers:
+        - name: worker
+          image: fibonacci-worker:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: REDIS_PORT
+              value: "6379"
+            - name: QUEUE_NAME
+              value: cola_fibonacci
+            - name: RESULT_TTL_SECONDS
+              value: "3600"
